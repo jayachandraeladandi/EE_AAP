@@ -1,0 +1,20 @@
+---
+version: 3
+
+images:
+  base_image:
+    name: quay.io/centos/centos:stream9
+
+dependencies:
+  ansible_runner:
+    package_pip: ansible-runner
+  ansible_core:
+    package_pip: ansible-core
+  python: requirements.txt
+  galaxy: requirements.yml
+  system: bindep.txt
+
+additional_build_steps:
+  prepend_base:
+    - RUN dnf -y install python python-pip
+    - RUN pip install ansible-core
